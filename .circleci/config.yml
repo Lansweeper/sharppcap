@@ -169,7 +169,7 @@ workflows:
             - lec-github-packages-rw
           # filters:
           #   branches:
-          #     only: master
+          #     only: master 
 
   run-daily-tests:
     triggers:
