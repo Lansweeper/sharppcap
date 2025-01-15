@@ -105,7 +105,7 @@ jobs:
           command: dotnet pack << pipeline.parameters.csproj-file >> --configuration Release
       - run:
           name: Pack the StaticLinking package
-          command: dotnet pack << pipeline.parameters.csproj-file >> --configuration StaticLinking --configuration Release
+          command: dotnet pack << pipeline.parameters.csproj-file >> --configuration Release /p:StaticLinking=true
       - run:
           name: Publish the default package
           command: |

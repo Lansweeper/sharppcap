@@ -35,7 +35,7 @@ SPDX-License-Identifier: MIT
 		<IsAotCompatible>true</IsAotCompatible>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)' == 'StaticLinking'">
+	<PropertyGroup Condition="'$(StaticLinking)' == 'true'">
 		<DefineConstants>STATIC_LINKING</DefineConstants>
 		<PackageId>Lansweeper.SharpPcap.StaticLinking</PackageId>
 		<Version>$(PackageVersion)</Version>
