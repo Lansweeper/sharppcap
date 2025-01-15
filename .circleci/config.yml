@@ -55,7 +55,7 @@ jobs:
           command: dotnet tool install --global dotnet-sonarscanner
       - run:
           name: Start SonarScanner
-          command: dotnet sonarscanner begin /k="<< parameters.sonar-project >>" /d:sonar.verbose=true /o:"lansweeper" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login=$Env:SONAR_TOKEN /d:sonar.language="cs"
+          command: dotnet sonarscanner begin /k:"<< parameters.sonar-project >>" /d:sonar.verbose=true /o:"lansweeper" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.login=$Env:SONAR_TOKEN /d:sonar.language="cs"
       - run: dotnet build << parameters.csproj-file >> --configuration Release
       - run:
           name: Upload SonarScanner results
