@@ -52,4 +52,15 @@ SPDX-License-Identifier: MIT
 			<_Parameter1>Test</_Parameter1>
 		</AssemblyAttribute>
 	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="README.md">
+			<Pack>true</Pack>
+			<PackagePath>README.md</PackagePath>
+		</None>
+		<None Update="README_StaticLinking.md">
+			<Pack>true</Pack>
+			<PackagePath>README_StaticLinking.md</PackagePath>
+		</None>
+	</ItemGroup>
 </Project>
