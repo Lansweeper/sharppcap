@@ -34,6 +34,13 @@ commands:
 jobs:
   build:
     executor: win/default
+    parameters:
+      csproj-file:
+        type: string
+        default: "<< parameters.csproj-file >>"
+      sonar-project:
+        type: string
+        default: "<< parameters.sonar-project >>"
     steps:
       - checkout
       - run:
@@ -89,6 +96,16 @@ jobs:
   nuget-publish:
     executor:
       name: win/default
+    parameters:
+      csproj-file:
+        type: string
+        default: "<< parameters.csproj-file >>"
+      nuget-output-file:
+        type: string
+        default: "<< parameters.nuget-output-file >>"
+      nuget-output-file-static:
+        type: string
+        default: "<< parameters.nuget-output-file-static >>"
     steps:
       - attach_workspace:
           at: .
@@ -167,9 +184,9 @@ workflows:
             - nuget-prepare
           context:
             - lec-github-packages-rw
-          # filters:
-          #   branches:
-          #     only: master
+          filters:
+            branches:
+              only: master
 
   run-daily-tests:
     triggers:
