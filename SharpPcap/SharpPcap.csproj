@@ -45,7 +45,7 @@ SPDX-License-Identifier: MIT
 	<ItemGroup>
 		<PackageReference Include="PacketDotNet" Version="1.4.7" />
 		<!-- to allow step into the source code, when using this SharpPcap as a NuGet package-->
-		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All"/>
+		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
 	</ItemGroup>
 	<ItemGroup>
 		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
@@ -57,10 +57,12 @@ SPDX-License-Identifier: MIT
 		<None Update="README.md">
 			<Pack>true</Pack>
 			<PackagePath>README.md</PackagePath>
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 		<None Update="README_StaticLinking.md">
 			<Pack>true</Pack>
 			<PackagePath>README_StaticLinking.md</PackagePath>
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>
 </Project>
