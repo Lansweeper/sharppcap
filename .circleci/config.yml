@@ -151,17 +151,17 @@ workflows:
           context:
             - lec-github-packages-rw
             - SonarCloud
-          filters:
-            branches:
-              only: master
+          # filters:
+          #   branches:
+          #     only: master
       - nuget-prepare:
           requires:
             - build
           context:
             - lec-github-packages-rw
-          filters:
-            branches:
-              only: master
+          # filters:
+          #   branches:
+          #     only: master
       - nuget-publish:
           requires:
             - nuget-prepare
