@@ -44,6 +44,9 @@ jobs:
             $version = $cn.Project.PropertyGroup.Version
             echo "export PACKAGE_VERSION=$version" >> $BASH_ENV
       - run:
+          name: Print PACKAGE_VERSION
+          command: echo "PACKAGE_VERSION=$env:PACKAGE_VERSION"
+      - run:
           name: Install SonarScanner for MSBuild .NET Core Global Tool
           command: dotnet tool install --global dotnet-sonarscanner
       - run:
@@ -106,6 +109,9 @@ jobs:
       # - run:
       #     name: Pack the StaticLinking package
       #     command: dotnet pack << pipeline.parameters.csproj-file >> --configuration Release /p:StaticLinking=true
+      - run:
+          name: Print PACKAGE_VERSION
+          command: echo "PACKAGE_VERSION=$env:PACKAGE_VERSION"
       - run:
           name: Publish the default package
           command: |
