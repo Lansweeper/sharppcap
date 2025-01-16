@@ -99,15 +99,6 @@ jobs:
       - attach_workspace:
           at: .
       - run:
-          name: Extract version from .csproj
-          shell: bash
-          command: |
-            version=$(grep -o "<Version>[^<]*" << pipeline.parameters.csproj-file >> | sed 's/<Version>//' | head -n 1)
-            echo "export PACKAGE_VERSION=$version" >> $BASH_ENV
-      - run:
-          name: Print PACKAGE_VERSION
-          command: echo "PACKAGE_VERSION=$env:PACKAGE_VERSION"
-      - run:
           name: Pack the default package
           command: dotnet pack << pipeline.parameters.csproj-file >> --configuration Release
       # - run:
@@ -118,8 +109,10 @@ jobs:
           command: echo "PACKAGE_VERSION=$env:PACKAGE_VERSION"
       - run:
           name: Publish the default package
+          shell: bash
           command: |
-            dotnet nuget push << pipeline.parameters.nuget-output-folder >>/Lansweeper.SharpPcap.$PACKAGE_VERSION.nupkg --source "github" --api-key $env:GITHUB_TOKEN
+            version=$(grep -o "<Version>[^<]*" << pipeline.parameters.csproj-file >> | sed 's/<Version>//' | head -n 1)
+            dotnet nuget push << pipeline.parameters.nuget-output-folder >>/Lansweeper.SharpPcap.$version.nupkg --source "github" --api-key $env:GITHUB_TOKEN
       # - run:
       #     name: Publish the StaticLinking package
       #     command: |
