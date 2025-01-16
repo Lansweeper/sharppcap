@@ -41,7 +41,8 @@ jobs:
           command: |
             $file = Get-Item << pipeline.parameters.csproj-file >>
             [xml]$cn = Get-Content $file
-            $version = $cn.Project.PropertyGroup.Version
+            $version = $cn.Project.PropertyGroup.Version | Select-Object -First 1
+            Write-Output version=$version
             echo "export PACKAGE_VERSION=$version" >> $BASH_ENV
       - run:
           name: Print PACKAGE_VERSION
