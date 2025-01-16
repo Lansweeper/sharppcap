@@ -40,7 +40,7 @@ jobs:
           name: Extract version from .csproj
           shell: bash
           command: |
-            version=$(grep -oPm1 "(?<=<Version>)[^<]+" << pipeline.parameters.csproj-file >>)
+            version=$(grep -o "<Version>[^<]*" << pipeline.parameters.csproj-file >> | sed 's/<Version>//' | head -n 1)
             echo "export PACKAGE_VERSION=$version" >> $BASH_ENV
       - run:
           name: Print PACKAGE_VERSION
@@ -98,7 +98,7 @@ jobs:
           name: Extract version from .csproj
           shell: bash
           command: |
-            version=$(grep -oPm1 "(?<=<Version>)[^<]+" << pipeline.parameters.csproj-file >>)
+            version=$(grep -o "<Version>[^<]*" << pipeline.parameters.csproj-file >> | sed 's/<Version>//' | head -n 1)
             echo "export PACKAGE_VERSION=$version" >> $BASH_ENV
       - run:
           name: Print PACKAGE_VERSION
