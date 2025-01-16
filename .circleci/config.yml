@@ -96,7 +96,8 @@ jobs:
           shell: bash
           command: |
             version=$(grep -o "<Version>[^<]*" << pipeline.parameters.csproj-file >> | sed 's/<Version>//' | head -n 1)
-            dotnet nuget push << pipeline.parameters.nuget-output-folder >>/Lansweeper.SharpPcap.$version.nupkg --source "github" --api-key $GITHUB_TOKEN
+            packageid=$(grep -o "<PackageId>[^<]*" << pipeline.parameters.csproj-file >> | sed 's/<PackageId>//' | head -n 1)
+            dotnet nuget push << pipeline.parameters.nuget-output-folder >>/$packageid.$version.nupkg --source "github" --api-key $GITHUB_TOKEN
       # - run:
       #     name: Publish the StaticLinking package
       #     command: |
