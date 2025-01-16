@@ -46,10 +46,9 @@ jobs:
       - run:
           name: Print PACKAGE_VERSION
           shell: bash
-          command: echo "PACKAGE_VERSION=$env:PACKAGE_VERSION"
-      - run:
-          name: Print pwd
-          command: pwd
+          command: |
+              echo "PACKAGE_VERSION=$env:PACKAGE_VERSION"
+              echo $version
       - run:
           name: Install SonarScanner for MSBuild .NET Core Global Tool
           command: dotnet tool install --global dotnet-sonarscanner
