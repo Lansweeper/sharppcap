@@ -37,19 +37,6 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Extract version from .csproj
-          shell: bash
-          command: |
-            version=$(grep -o "<Version>[^<]*" << pipeline.parameters.csproj-file >> | sed 's/<Version>//' | head -n 1)
-            echo $version
-            echo 'export PACKAGE_VERSION=$version' >> $BASH_ENV
-      - run:
-          name: Print PACKAGE_VERSION
-          shell: bash
-          command: |
-              echo "PACKAGE_VERSION=$env:PACKAGE_VERSION"
-              echo $version
-      - run:
           name: Install SonarScanner for MSBuild .NET Core Global Tool
           command: dotnet tool install --global dotnet-sonarscanner
       - run:
@@ -105,18 +92,15 @@ jobs:
       #     name: Pack the StaticLinking package
       #     command: dotnet pack << pipeline.parameters.csproj-file >> --configuration Release /p:StaticLinking=true
       - run:
-          name: Print PACKAGE_VERSION
-          command: echo "PACKAGE_VERSION=$env:PACKAGE_VERSION"
-      - run:
           name: Publish the default package
           shell: bash
           command: |
             version=$(grep -o "<Version>[^<]*" << pipeline.parameters.csproj-file >> | sed 's/<Version>//' | head -n 1)
-            dotnet nuget push << pipeline.parameters.nuget-output-folder >>/Lansweeper.SharpPcap.$version.nupkg --source "github" --api-key $env:GITHUB_TOKEN
+            dotnet nuget push << pipeline.parameters.nuget-output-folder >>/Lansweeper.SharpPcap.$version.nupkg --source "github" --api-key $GITHUB_TOKEN
       # - run:
       #     name: Publish the StaticLinking package
       #     command: |
-      #       dotnet nuget push << pipeline.parameters.nuget-output-file-static >> --source "github" --api-key $env:GITHUB_TOKEN
+      #       dotnet nuget push << pipeline.parameters.nuget-output-file-static >> --source "github" --api-key $GITHUB_TOKEN
 
 
   sonar:
