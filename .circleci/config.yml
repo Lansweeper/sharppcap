@@ -38,11 +38,9 @@ jobs:
       - checkout
       - run:
           name: Extract version from .csproj
+          shell: bash
           command: |
-            $file = Get-Item << pipeline.parameters.csproj-file >>
-            [xml]$cn = Get-Content $file
-            $version = $cn.Project.PropertyGroup.Version | Select-Object -First 1
-            Write-Output version=$version
+            version=$(grep -oPm1 "(?<=<Version>)[^<]+" << parameters.csproj-file >>)
             echo "export PACKAGE_VERSION=$version" >> $BASH_ENV
       - run:
           name: Print PACKAGE_VERSION
@@ -97,13 +95,14 @@ jobs:
       - attach_workspace:
           at: .
       - run:
-          name: Set correct version in csproj file, build and pack it
+          name: Extract version from .csproj
+          shell: bash
           command: |
-            $file = Get-Item << pipeline.parameters.csproj-file >>
-            [xml]$cn = Get-Content $file
-            $cn.Project.PropertyGroup.Version="$env:PACKAGE_VERSION"
-            $cn.Save($file.FullName)
-            type ./<< pipeline.parameters.csproj-file >>
+            version=$(grep -oPm1 "(?<=<Version>)[^<]+" << parameters.csproj-file >>)
+            echo "export PACKAGE_VERSION=$version" >> $BASH_ENV
+      - run:
+          name: Print PACKAGE_VERSION
+          command: echo "PACKAGE_VERSION=$env:PACKAGE_VERSION"
       - run:
           name: Pack the default package
           command: dotnet pack << pipeline.parameters.csproj-file >> --configuration Release
