@@ -22,6 +22,8 @@ jobs:
       run: sudo -E bash scripts/install-libpcap.sh
     - name: Install tap
       run: sudo -E bash scripts/install-tap.sh
+    - name: Install .NET SDK Workloads
+      run: dotnet workload install microsoft-net-sdk-windowsdesktop # for Winforms Example
     - name: Build sharppcap assembly
       run: dotnet build SharpPcap/SharpPcap.csproj
     - name: Test
