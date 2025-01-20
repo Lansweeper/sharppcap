@@ -10,9 +10,6 @@ parameters:
   nuget-output-folder:
     type: string
     default: "SharpPcap/bin/Release"
-  # nuget-output-file-static:
-  #   type: string
-  #   default: "SharpPcap/bin/Release/Lansweeper.SharpPcap.StaticLinking.$PACKAGE_VERSION.nupkg"
 
 executors:
   node:
@@ -88,9 +85,6 @@ jobs:
       - run:
           name: Pack the default package
           command: dotnet pack << pipeline.parameters.csproj-file >> --configuration Release
-      # - run:
-      #     name: Pack the StaticLinking package
-      #     command: dotnet pack << pipeline.parameters.csproj-file >> --configuration Release /p:StaticLinking=true
       - run:
           name: Publish the default package
           shell: bash
@@ -98,11 +92,6 @@ jobs:
             version=$(grep -o "<Version>[^<]*" << pipeline.parameters.csproj-file >> | sed 's/<Version>//' | head -n 1)
             packageid=$(grep -o "<PackageId>[^<]*" << pipeline.parameters.csproj-file >> | sed 's/<PackageId>//' | head -n 1)
             dotnet nuget push << pipeline.parameters.nuget-output-folder >>/$packageid.$version.nupkg --source "github" --api-key $GITHUB_TOKEN
-      # - run:
-      #     name: Publish the StaticLinking package
-      #     command: |
-      #       dotnet nuget push << pipeline.parameters.nuget-output-file-static >> --source "github" --api-key $GITHUB_TOKEN
-
 
   sonar:
     executor: node

@@ -28,18 +28,11 @@ SPDX-License-Identifier: MIT
 			It provides an API for capturing, injecting, analyzing and building packets using any .NET language such as C# and VB.NET.
 		</Description>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<PackageReadmeFile>README.md</PackageReadmeFile><!-- Default README for Lansweeper.SharpPcap -->
+		<PackageReadmeFile>README.md</PackageReadmeFile><!-- README for Lansweeper.SharpPcap NuGet -->
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<Deterministic>true</Deterministic>
 		<IsTrimmable>true</IsTrimmable>
 		<IsAotCompatible>true</IsAotCompatible>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(StaticLinking)' == 'true'">
-		<DefineConstants>STATIC_LINKING</DefineConstants>
-		<PackageId>Lansweeper.SharpPcap.StaticLinking</PackageId>
-		<Version>$(PackageVersion)</Version>
-		<PackageReadmeFile>README_StaticLinking.md</PackageReadmeFile><!-- README for Lansweeper.SharpPcap.StaticLinking -->
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -57,11 +50,6 @@ SPDX-License-Identifier: MIT
 		<None Update="README.md">
 			<Pack>true</Pack>
 			<PackagePath>README.md</PackagePath>
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Update="README_StaticLinking.md">
-			<Pack>true</Pack>
-			<PackagePath>README_StaticLinking.md</PackagePath>
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>
