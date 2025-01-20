@@ -5,6 +5,7 @@
 // SPDX-License-Identifier: MIT
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Text;
@@ -18,16 +19,15 @@ namespace SharpPcap.LibPcap
     [SuppressUnmanagedCodeSecurity]
     internal static partial class LibPcapSafeNativeMethods
     {
-
         internal static PcapError pcap_setbuff(PcapHandle /* pcap_t */ adapter, int bufferSizeInBytes)
         {
-            return RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+            return OperatingSystem.IsWindows()
                 ? _pcap_setbuff(adapter, bufferSizeInBytes)
                 : PcapError.PlatformNotSupported;
         }
         internal static PcapError pcap_setmintocopy(PcapHandle /* pcap_t */ adapter, int sizeInBytes)
         {
-            return RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+            return OperatingSystem.IsWindows()
                 ? _pcap_setmintocopy(adapter, sizeInBytes)
                 : PcapError.PlatformNotSupported;
         }
