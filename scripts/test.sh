@@ -7,7 +7,7 @@ set -e
 
 TEST_ARGS=("$@")
 
-TEST_ARGS+=( -p:CollectCoverage=true )
+# TEST_ARGS+=( -p:CollectCoverage=false )
 TEST_ARGS+=( --blame-crash )
 
 # select logger based on CI server
