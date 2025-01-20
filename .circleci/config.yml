@@ -147,10 +147,4 @@ workflows:
             - lec-github-packages-rw
           # filters:
           #   branches:
-          #     only: master 
-
-    jobs:
-      - build:
-          context:
-            - lec-github-packages-rw
-            - SonarCloud
+          #     only: master
