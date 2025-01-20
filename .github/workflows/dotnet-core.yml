@@ -29,18 +29,18 @@ jobs:
       # env:
       #   CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
-    # - run: sudo chmod -R +r Test/TestResults
-    #   if: always()
-    # - name: Publish Test Report
-    #   uses: mikepenz/action-junit-report@v5
-    #   if: always()
-    #   with:
-    #     report_paths: Test/TestResults/TestResults.xml
-    # - uses: actions/upload-artifact@v4
-    #   if: failure()
-    #   with:
-    #     name: artifacts
-    #     path: Test/TestResults/
+    - run: sudo chmod -R +r Test/TestResults
+      if: always()
+    - name: Publish Test Report
+      uses: mikepenz/action-junit-report@v5
+      if: always()
+      with:
+        report_paths: Test/TestResults/TestResults.xml
+    - uses: actions/upload-artifact@v4
+      if: failure()
+      with:
+        name: artifacts
+        path: Test/TestResults/
 
     # - name: publish on version change
     #   id: publish_nuget

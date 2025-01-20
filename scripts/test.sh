@@ -22,7 +22,7 @@ else
     TEST_ARGS+=( --logger:junit --test-adapter-path:. )
 fi
 
-dotnet test "${TEST_ARGS[@]}"
+dotnet test "${TEST_ARGS[@]}" Test/Test.csproj
 
 # # coverage
 # pip install codecov-cli || python3 -m pip install codecov-cli
