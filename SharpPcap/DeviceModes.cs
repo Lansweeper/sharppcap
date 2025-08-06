@@ -30,12 +30,14 @@ namespace SharpPcap
         /// has to be done with UDP protocol. 
         /// </summary>
         [SupportedOSPlatform("windows")]
+        [SupportedOSPlatform("macos14.0")]
         DataTransferUdp = 2,
 
         /// <summary>
         /// Defines if the remote probe will capture its own generated traffic. 
         /// </summary>
         [SupportedOSPlatform("windows")]
+        [SupportedOSPlatform("macos14.0")]
         NoCaptureRemote = 4,
 
         /// <summary>
