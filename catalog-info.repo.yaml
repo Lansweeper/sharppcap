@@ -8,4 +8,4 @@ metadata:
   name: sharppcap
 spec:
   lifecycle: stable
-  owner: unknown
+  owner: research
